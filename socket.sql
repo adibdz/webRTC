@@ -63,9 +63,6 @@ CREATE TABLE IF NOT EXISTS `file` (
 -- Dumping data for table `file`
 --
 
-INSERT INTO `file` (`id_file`, `kode_matkul_present`, `nama_matkul_present`, `chapter`, `kode_user_fk`, `path`, `nama_file_alias`, `jumHal`) VALUES
-('3jyJo4MXAxesIvcMU3AHg55y72bzrCzch1rUxpeduL5bthsRWBDbmCg7Pm08', '001', 'Database', 2, 'E3110502', '/uploadFile/', 'E3110502_01_-_Perkenalan_2015_8_4.pdf', 10),
-('C8ba4LiQtErT37HgLXb8NuGEBtTzhORHsAQw8ySw9inFwOFuGtf0jzwH131d', '001', 'w', 2, 'E3110502', '/uploadFile/', 'E3110502_01_-_Perkenalan_4Wa3lIJYOm.pdf', 10);
 
 -- --------------------------------------------------------
 
@@ -85,10 +82,6 @@ CREATE TABLE IF NOT EXISTS `kelas` (
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`kode_kelas`, `nama_kelas`) VALUES
-(3, 'D4LJELIN'),
-(1, 'D4LJIT'),
-(2, 'D4MMB');
 
 -- --------------------------------------------------------
 
@@ -113,11 +106,6 @@ CREATE TABLE IF NOT EXISTS `sections` (
 -- Dumping data for table `sections`
 --
 
-INSERT INTO `sections` (`id_sections`, `no_section`, `judul_isi`, `isi_section`, `data_transition`, `data_background`, `id_present_fk`) VALUES
-('aCdAeUDz9AOdzybhlxtmGxfRGSNAoRpnvos4YCKEeVnRTCyjln8VmKPQvrgs', 1, 'Perangkat Cisco', 'Beberapa perangkat cisco yaitu router, bridge, switch dan hub.', 'default', '#535252', 'Cisco_Basic'),
-('cR6d4bU62x6IE70nvRE8zc2xGuTsiNNmvnFEc7ne7aGyaMveh6lnHoWksEtN', 3, 'Contoh Perangkat', 'Cisco data center and backbone switches : 2900, 4000 dan 5000 Switches', 'default', '', 'Cisco_Basic'),
-('KhBDGL6oKtbelLI8rXpue9ROBKqtu1OgF04YA4Y7RTdGKi3J1FyFvnLe2MMN', 1, 'asdasd', 'hgjggjh', 'default', '', 'Network_Security'),
-('ZTaWQniAa3A5oR3pnsDboHf44qnLu9WT3Dj3Ow2tPu6qTiV41IoSqdLx69bJ', 2, 'Sertifikasi Cisco', '1. Association: CCNA, CCDA\r\n2. Professional:  CCNP, CCDP\r\n3. Expert: CCIE', 'cube', '#0d1368', 'Cisco_Basic');
 
 -- --------------------------------------------------------
 
@@ -137,12 +125,6 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 -- Dumping data for table `sessions`
 --
 
-INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('NhxKJiPfyrNfpAmzBKm3_hADl2r9JDgI', 1439433292, '{"cookie":{"originalMaxAge":10800000,"expires":"2015-08-13T02:34:51.596Z","httpOnly":true,"path":"/"},"passport":{}}'),
-('QjcNKKC9fXnOqKu8lTTqXUKxj4a9OQyK', 1438661683, '{"cookie":{"originalMaxAge":10800000,"expires":"2015-08-04T04:14:43.364Z","httpOnly":true,"path":"/"},"passport":{}}'),
-('VlneUjaMNkMKe5CAn3aymCEBlozyTAvq', 1438663182, '{"cookie":{"originalMaxAge":10799995,"expires":"2015-08-04T04:39:42.388Z","httpOnly":true,"path":"/"},"passport":{}}'),
-('jA5xWxgXfnCU-H7y8TeJJq7GTyXkV3ho', 1438577079, '{"cookie":{"originalMaxAge":10800000,"expires":"2015-08-03T04:44:38.842Z","httpOnly":true,"path":"/"},"passport":{"user":"2110135029"}}'),
-('qhVOH4QRZ8By0-ezW-ZMQLyFOirAA7IM', 1438577837, '{"cookie":{"originalMaxAge":10800000,"expires":"2015-08-03T04:57:17.190Z","httpOnly":true,"path":"/"},"passport":{"user":"E3110502"}}');
 
 -- --------------------------------------------------------
 
@@ -165,9 +147,6 @@ CREATE TABLE IF NOT EXISTS `slide` (
 -- Dumping data for table `slide`
 --
 
-INSERT INTO `slide` (`id_present`, `kode_matkul_slide`, `nama_matkul_slide`, `chapter`, `kode_user_fk`) VALUES
-('Cisco_Basic', 'C0001', 'Jaringan Komputer', 1, 'E3110502'),
-('Network_Security', 'N0001', 'Jaringan Komputer', 1, 'E3110504');
 
 -- --------------------------------------------------------
 
@@ -215,27 +194,6 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`kode_user`, `email`, `password`, `nama_user`, `level`, `kode_kelas_fk`, `tahun_angkatan`) VALUES
-('1', 'matthew@pens.ac.id', '$2a$08$apgtncHUYEmYO68c7EkT5ex3IT7pxo8COkKpJSe87Wa8yfdUjkitW', 'Farrell Matthew', 'Admin', NULL, NULL),
-('2110130502', 'erwin@it.student.pens.ac.id', '$2a$08$heVVBsqxHiodi4LGUcZOjuXxLXR7mxc82pzXqI4/IG2.W7Jnj2IW2', 'Erwin Kurniawan', 'User', 1, 2010),
-('2110135001', 'pradit@it.student.pens.ac.id', '$2a$08$05Hb9co3sQaZOhMeq8l21Oqrs3GmAtas8Dbgq4RTHCwk/R4d0EE.u', 'Praditya Eka', 'User', 1, 2010),
-('2110135002', 'fahmi@it.student.pens.ac.id', '$2a$08$fHTrx2UFHY8IXI56/6Rf0uID/SzaAPV5bVMTQT3gjW6TRCd1RojyC', 'Fahmi Ghozali', 'User', 1, 2010),
-('2110135003', 'faruq@it.student.pens.ac.id', '$2a$08$R9ez2ZhoVqAM7NmlrjR8QuxVanerMHR7Zf8U6zPeTucVBlb/zoeUC', 'Faruq Ibrahim', 'User', 1, 2010),
-('2110135004', 'Umar@it.student.pens.ac.id', '$2a$08$CiK6RBgmS74L2G.E8CEwAeJatkdkhNh2YxNnLjgKQ8f1LXi/BWNtS', 'Umar Faiz', 'User', 1, 2010),
-('2110135005', 'sandi@it.student.pens.ac.id', '$2a$08$JlhzxJJuSaqKVrzjVSHmj.B9Bjc0cHz1ItTvZin6uDllAVATo/Hhm', 'Sandi Yahya', 'User', 1, 2010),
-('2110135006', 'fais@it.student.pens.ac.id', '$2a$08$./Y4tC6dNtECGX9QRWWw5./MW7bpMy0CNB2M7ma1Y8mBDcT65OBWi', 'Faiz Muklis', 'User', 1, 2010),
-('2110135007', 'robit@it.student.pens.ac.id', '$2a$08$WA1kv5mfMATsInlEw1mjYe/sDXQRGIN93rirtuizfEViXoH1ROg2a', 'Robit F R', 'User', 1, 2010),
-('2110135008', 'adiguna@it.student.pens.ac.id', '$2a$08$NUvMtn2f9JpDRIbk3ZBewuVSJ9IjIaPA3Y9E94qO7DgQ1htXql2ye', 'Adiguna Surya H', 'User', 1, 2010),
-('2110135009', 'rudik@it.student.pens.ac.id', '$2a$08$zs3zwayVdCzXDB.UdhTxCuf0NHCnbKbHQN5s9IGy39UK.Cv9wIMw2', 'Rudik Hariyanto', 'User', 1, 2010),
-('2110135010', 'ways@it.student.pens.ac.id', '$2a$08$PUfZLLUhv8EIjMgaK94tN.sGMTpiZEqUg2yn4vd2ccc0Gj4ay3JSW', 'Aulia Uways A Q', 'User', 1, 2010),
-('2110135026', 'adi@it.student.pens.ac.id', '$2a$08$SLQg/BsT.XLzr8qf3OyXBeyJ7K7OoXCCj2yOTFoJRXL0BwIH3595O', 'Adi Chandra', 'User', 1, 2013),
-('2110135027', 'hanafi@it.student.pens.ac.id', '$2a$08$H0gZKnM1HfbZ7wJfEpQPaOeFZCh4.Ex5Cna7A.KZbk5Z8sHqjXhUG', 'M Murti Hanafi', 'User', 1, 2010),
-('2110135028', 'rizal@it.student.pens.ac.id', '$2a$08$NN3f/fpi.msdj.jrGn3RG.b6tMC7h/Rn37q3/7D5zHNFy/Sskyaym', 'M Rizal Fauzi', 'User', 1, 2010),
-('2110135029', 'diki@it.student.pens.ac.id', '$2a$08$mwFy4Jyt/EySfj1VOIu6Qe1cEn/N7lFOxIwALgJlU.00ds2luglye', 'M Zidki E', 'User', 1, 2010),
-('2110135338', 'dzulfikar@it.student.pens.ac.id', '$2a$08$P60JAO2EasYKM97SZb5zleqGcum9/1.SYLGIu8OCLVmk.wzvkxG8O', 'Fens Ego', 'User', 1, 2010),
-('E3110502', 'adib@pens.ac.id', '$2a$08$GVeAOFerSr2rGfve9iUIAejje9ap4RSyEDmKvW6znQ.DUGX7NMVuC', 'Dzulfikar Adib', 'Dosen', NULL, NULL),
-('E3110503', 'dosen@pens.ac.id', '$2a$08$YWXET9iaGLDSFG3GJ2fNA.5cWApET1LZ42qETeSUbcJBy86rw9w4i', 'Adib Dzulfikar', 'Dosen', NULL, NULL),
-('E3110504', 'lec@pens.ac.id', '$2a$08$TbsxW8YJzZdGhkqJAwptJ.yg//E.iMUzJ6x3tFdWL.anBF9nVjlrW', 'Lecturer Def', 'Dosen', NULL, NULL);
 
 -- --------------------------------------------------------
 
