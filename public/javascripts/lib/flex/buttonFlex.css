@@ -1,0 +1,16 @@
+		.flexigrid div.fbutton .add {
+			background: url(images_style/add.png) no-repeat center left;
+		}
+		.flexigrid div.fbutton .edit {
+			background: url(images_style/edit.png) no-repeat center left;
+		}
+		.flexigrid div.fbutton .cmdedit {
+			background: url(images_style/edit.png) no-repeat center left;
+		}
+
+		.flexigrid div.fbutton .delete {
+			background: url(images_style/close.png) no-repeat center left;
+		}
+		.flexigrid div.fbutton .refresh {
+			background: url(images_style/refresh.png) no-repeat center left;
+		}

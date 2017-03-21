@@ -1,0 +1,148 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#kelasUser').hide();
+		$('#thUser').hide();
+		$('#modalAddUser').modal({
+			show:true
+		});
+		$('#level').change(function() {
+			var isi = $(this).val();
+			if(isi == 'User') {
+				$('#kelasUser').show();
+				$('#thUser').show();
+			} else {
+				$('#kelasUser').hide();
+				$('#thUser').hide();
+				$('#kelas').val('');
+				$('#thAngkatan').val('');
+			}
+		});
+		$(function () {
+			var rules = {
+				rules: {
+					idUser : {
+						required: true
+						// required: true,
+						// digits: true
+					},
+					email: {
+				    	required: true,
+				    	email: true
+			      	},
+			      	password: {
+				    	required: true
+			      	},
+			      	name: {
+				    	required: true
+			      	},
+			      	level: {
+				    	required: true
+			      	}
+				}
+			};
+			var validationObj = $.extend (rules, Application.validationRules);
+			$('#formAddUser').validate(validationObj);
+		});
+		$('#formAddUser').submit(function(){
+			if($('#formAddUser').valid()) {
+				$.ajax({
+					type	: $(this).attr('method'),
+					url		: $(this).attr('action'),
+					data	: $(this).serialize(),
+					dataType: 'json',
+					beforeSend: function(){
+						$('#btn').attr('class','btn btn-primary disabled');
+					},
+					success	: function(response) {
+						//alert("response = "+response.status);
+						if(response.status == 1) {
+							$('#alert').attr('class','alert alert-success');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Input Sukses.');
+							$('#iconAlert').attr('class','icon-thumbs-up');
+							$('.tabelFlex').flexReload();
+							$('#alert').show();
+						} else if(response.status == 2) {
+							$('#alert').attr('class','alert alert-error');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Input Gagal: '+response.eror);
+							$('#iconAlert').attr('class','icon-thumbs-down');
+							$('#alert').show();
+						}
+						$('#btn').attr('class','btn btn-primary');
+					}
+				})
+				return false;
+			}
+		});
+	});
+</script>
+<div id="modalAddUser" class="modal hide fade">
+	<form action="/admin/ajax/addDataUser" method="POST" class="form-horizontal" id="formAddUser">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Add User</h3>
+	</div>
+	<div class="modal-body">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="idUser">ID</label>
+					<div class="controls">
+						<input type="text" name="idUser" id="idUser" placeholder="NIP / NRP">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="email">E-mail</label>
+					<div class="controls">
+						<input type="text" name="email" id="email">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="password">Password</label>
+					<div class="controls">
+						<input type="text" name="password" id="password">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="name">Nama</label>
+					<div class="controls">
+						<input type="text" name="name" id="name">
+					</div>
+				</div>
+				<div class="control-group">
+				    <label class="control-label" for="level">Level</label>
+				    <div class="controls">
+				        <select id="level" name="level">
+				        	<option value="">Pilih . . .</option>
+				            <option value='Admin'>Administrator</option>
+							<option value='Dosen'>Dosen</option>
+							<option value='User'>User</option>
+				        </select>
+				    </div>
+				</div>
+				<div class="control-group" id="kelasUser">
+				    <label class="control-label" for="kelas">Kelas</label>
+				    <div class="controls">
+				        <select id="kelas" name="kelas">
+				        	<option value="">Pilih . . .</option>
+				           	<% for(var i=0; i<data.length; i++) { %>
+				           		<option value= <%= data[i].kode %> > <%= data[i].kelas %> </option>
+				           	<% } %>	
+				        </select>
+				    </div>
+				</div>
+				<div class="control-group" id="thUser">
+					<label class="control-label" for="thAngkatan">Tahun Angkatan</label>
+					<div class="controls">
+						<input type="text" name="thAngkatan" id="thAngkatan">
+					</div>
+				</div>
+			</fieldset>
+	</div>
+	<div class="modal-footer">
+		<div id="alert" class="alert" style="display:none">
+			<div id="ketAlert"></div>
+		</div>
+		<button type="submit" class="btn btn-primary" id="btn">Simpan</button>
+		<button type="reset" class="btn">Cancel</button>
+	</div>
+	</form>
+</div>

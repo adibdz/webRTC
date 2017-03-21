@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ./partial/head %>
+		<link rel="stylesheet" href="/javascripts/lib/flex/flexigrid.pack.css">
+		<link rel="stylesheet" href="/javascripts/lib/flex/buttonFlex.css">
+		<link rel="stylesheet" href="/bootstrap/colorpicker/css/colorpicker.css">
+		<style type="text/css">
+			.flexigrid div.pDiv div.pDiv2 {
+				margin: 3px 3px 10px -2px;
+			}
+			.flexigrid div.pDiv .pcontrol, .flexigrid div.pDiv .pPageStat {
+				top: -4px; 
+			}	
+			.colorpicker {
+				z-index: 1050
+			}
+		</style>
+		<script type="text/javascript" src="/javascripts/lib/flexigrid.pack.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/Application.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/jquery.form.js"></script>
+		<script type="text/javascript" src="/bootstrap/colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script type='text/javascript' src='/javascripts/dosen/slide.js'></script>
+	</head>
+	<body>
+		<% include ./partial/header %>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<div class="hero-unit">
+						<span class="badge badge-success">1</span> Add Slide<br>
+						<span class="badge badge-warning">2</span> Get back to presentation<br>
+						<span class="badge badge-info">3</span> Create Room
+						
+						<table class="tabelFlex"></table>
+						<div id="modal"></div>
+					</div>
+				</div>
+		    </div>
+		</div>
+      	<% include ./partial/footer %>
+	</body>
+</html>

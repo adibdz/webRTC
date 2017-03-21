@@ -1,0 +1,50 @@
+#bawahNavbar {
+	margin-bottom: 2.5em;
+}
+#messages {
+	height: 20em;
+	overflow: auto;
+	border-radius: 6px;
+	padding: 5px 20px 5px 20px;
+	margin-bottom: 5px;
+	font-size: 18px;
+	font-weight: 200;
+	line-height: 30px;
+	color: inherit;
+	webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	background-color: #C7C1C1;
+}
+#hasilCapture {
+	float: right;
+}
+
+/*
+*	custom responsive
+*
+*/
+
+@media (min-width: 768px) and (max-width: 979px) {
+	.span9 {
+		width: 724px;
+	}
+	.span3 {
+		width: 476px;
+	}
+}
+
+#localVideo {
+	weight: 200px;
+	height: 180px;
+}
+
+#remoteVideo {
+	weight: 200px;
+	height: 180px;
+	margin-left: 75px;
+}
+
+#btn-rtc {
+	margin-bottom: 20px;
+}
+			

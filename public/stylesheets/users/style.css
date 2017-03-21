@@ -1,0 +1,239 @@
+			body {
+	        	padding-top: 60px;
+	        	padding-bottom: 40px;
+	        	/*background-color: #4a4446;*/
+	        }
+	        #notice {
+		  		border: #ffa800 solid 2px;
+                background-color: #f0fa7f;
+                color: #ff0000;
+			}
+            #noticeCall {
+                border: #157d94 solid 2px;
+                background-color: #3dd4f5;
+                color: #ffffff;
+            }
+	       	.footer {
+				text-align: center;
+			  	padding: 30px 0;
+				margin-top: 70px;
+				border-top: 1px solid #e5e5e5;
+				background-color: #f5f5f5;
+			}
+			.footer p {
+				margin-bottom: 0;
+				color: #777;
+			}
+			.footer-links {
+				margin: 10px 0;
+			}
+			.footer-links li {
+			  	display: inline;
+			  	padding: 0 2px;
+			}
+			.footer-links li:first-child {
+				padding-left: 0;
+			}
+			.easyrtcMirror {
+				border: #053652 solid 2px;
+				border-radius: 6px;
+				box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+				width: 70%;
+				height: 150px;
+			}
+			#acceptCallBox {
+		  		display: none;
+		  		z-index: 2;
+				position: absolute;
+		  		top: 100px;
+		  		left: 400px;
+		  		border: red solid 2px;
+		  		background-color: pink;
+		  		padding: 15px;
+			}
+			#listActiveStudent {
+				height: 220px;
+				overflow: scroll;
+			}
+
+            @media only screen and (max-width: 979px) {
+                .popup-box
+                {
+                    display: none !important;
+                }
+                
+                .popup-beforeClick
+                {
+                    display: none !important;
+                }
+            }
+            
+			.popup-box {
+                position: fixed;
+                left: 25%;
+                bottom: 0px;
+                height: 400px;
+                background-color: rgb(237, 239, 244);
+                border: 1px solid rgba(29, 49, 91, .3);
+            }
+            .popup-head {
+                position: relative;
+                background-color: #6d84b4;
+                padding: 5px;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                clear: both;
+                cursor: pointer;
+                /*border: 1px solid #ccc;*/
+                webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                -webkit-transition: border linear .2s,box-shadow linear .2s;
+                -moz-transition: border linear .2s,box-shadow linear .2s;
+                -o-transition: border linear .2s,box-shadow linear .2s;
+                transition: border linear .2s,box-shadow linear .2s;
+            }
+            .popup-beforeClick {
+                position: fixed;
+                left: 25%;
+                bottom: 0px;
+                background-color: #6d84b4;
+                padding: 5px;
+                color: white;
+                font-weight: bold;
+                font-size: 14px;
+                cursor: pointer;
+            }
+            .messages
+            {
+                font-size: 13px;
+                padding: 10px;
+                height: 319px;
+                background-color: green;
+                background-color: rgb(237, 239, 244);
+                /*border-width: 1px;*/
+                /*border-color: black;*/
+                /*border-style: solid;*/
+                overflow-y: scroll;
+
+                border: 1px solid #ccc;
+                webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                -webkit-transition: border linear .2s,box-shadow linear .2s;
+                -moz-transition: border linear .2s,box-shadow linear .2s;
+                -o-transition: border linear .2s,box-shadow linear .2s;
+                transition: border linear .2s,box-shadow linear .2s;
+            }
+
+            .messages ul
+            {
+                padding: 0px;
+                list-style-type: none;
+                margin: 0;
+            }
+
+            .messages ul li
+            {
+                height: auto;
+                margin-bottom: 10px;
+                clear: both;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .messages ul li span
+            {
+                display: inline-block;
+                max-width: 200px;
+                background-color: white;
+                padding: 5px;
+                border-radius: 4px;
+                position: relative;
+                border-width: 1px;
+                border-style: solid;
+                border-color: grey;
+            }
+
+            .messages ul li span.left
+            {
+                float: left;
+            }
+
+            .messages ul li span.left:after
+            {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: -8.5px;
+                top: 7px;
+                height: 0px;
+                width: 0px;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-right: 8px solid white;
+            }
+
+            .messages ul li span.left:before
+            {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: -9px;
+                top: 7px;
+                height: 0px;
+                width: 0px;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-right: 8px solid black;
+            }
+
+            .messages ul li span.right:after
+            {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                right: -8px;
+                top: 6px;
+                height: 0px;
+                width: 0px;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 8px solid #dbedfe;
+            }
+
+            .messages ul li span.right:before
+            {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                right: -9px;
+                top: 6px;
+                height: 0px;
+                width: 0px;
+                border-top: 8px solid transparent;
+                border-bottom: 8px solid transparent;
+                border-left: 8px solid black;
+            }
+
+            .messages ul li span.right
+            {
+                float: right;
+                background-color: #dbedfe;
+            }
+
+            .clear
+            {
+                clear: both;
+            }
+
+            textarea, #inputMessage
+            {
+                background-color: white;
+                /*resize: none;*/
+                font-size: 12px;
+                -webkit-border-radius: 0px;
+                -moz-border-radius: 0px;
+                border-radius: 0px;
+            }

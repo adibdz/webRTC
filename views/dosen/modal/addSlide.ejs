@@ -1,0 +1,101 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#modalAddSlide').modal({
+			show:true
+		});
+		$(function () {
+			var rules = {
+				rules: {
+					idPresent: {
+				    	required: true
+			      	},
+			      	kdMakul: {
+				    	required: true
+			      	},
+			      	nMakul: {
+				    	required: true
+			      	},
+					chapter : {
+						required: true,
+						digits: true
+					}
+				}
+			};
+			var validationObj = $.extend (rules, Application.validationRules);
+			$('#formAddSlide').validate(validationObj);
+		});
+		$('#formAddSlide').submit(function(){
+			if($('#formAddSlide').valid()) {
+				$.ajax({
+					type	: $(this).attr('method'),
+					url		: $(this).attr('action'),
+					data	: $(this).serialize(),
+					dataType: 'json',
+					beforeSend: function(){
+						$('#btn').attr('class','btn btn-primary disabled');
+					},
+					success	: function(response) {
+						//alert("response = "+response.status);
+						if(response.status == 1) {
+							$('#alert').attr('class','alert alert-success');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Input Sukses.');
+							$('#iconAlert').attr('class','icon-thumbs-up');
+							$('.tabelFlex').flexReload();
+							$('#alert').show();
+						} else if(response.status == 2) {
+							$('#alert').attr('class','alert alert-error');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Input Gagal: '+response.eror);
+							$('#iconAlert').attr('class','icon-thumbs-down');
+							$('#alert').show();
+						}
+						$('#btn').attr('class','btn btn-primary');
+					}
+				})
+				return false;
+			}
+		});
+	});
+</script>
+<div id="modalAddSlide" class="modal hide fade">
+	<form action="/dosen/ajax/addDataSlide" method="POST" class="form-horizontal" id="formAddSlide">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Add Presentasi</h3>
+	</div>
+	<div class="modal-body">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="idPresent">ID Presentasi</label>
+					<div class="controls">
+						<input type="text" name="idPresent" id="idPresent">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="kdMakul">Kode Makul</label>
+					<div class="controls">
+						<input type="text" name="kdMakul" id="kdMakul" placeholder="Kode Mata Kuliah">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="nMakul">Nama Makul</label>
+					<div class="controls">
+						<input type="text" name="nMakul" id="nMakul" placeholder="Nama Mata Kuliah">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="chapter">Chapter</label>
+					<div class="controls">
+						<input type="text" name="chapter" id="chapter" placeholder="Pertemuan ke-">
+					</div>
+				</div>
+			</fieldset>
+	</div>
+	<div class="modal-footer">
+		<div id="alert" class="alert" style="display:none">
+			<div id="ketAlert"></div>
+		</div>
+		<button type="submit" class="btn btn-primary" id="btn">Simpan</button>
+		<button type="reset" class="btn">Cancel</button>
+	</div>
+	</form>
+</div>

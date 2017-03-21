@@ -1,0 +1,23 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#modalAlert').modal({
+			show:true
+		});
+		$('#linkRedirect').attr('href', '<%=link%>');
+	});
+</script>
+<div id="modalAlert" class="modal hide fade">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<span class="label label-important"><h3>Stop !</h3></span>
+	</div>
+	<div class="modal-body">
+		<div class="alert alert-error">
+			Room anda masih berlangsung. Harap tutup terlebih dahulu untuk membuat room baru.
+			<a href="" id="linkRedirect" class="btn btn-info"><i id="iconAlert" class="icon-chevron-right"></i>&nbsp;Akses Room</a>
+		</div>
+	</div>
+	<div class="modal-footer">
+		
+	</div>
+</div>

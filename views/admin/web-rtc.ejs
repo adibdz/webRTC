@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ./partial/head %>
+		<script type="text/javascript" src="/javascripts/lib/adapter.js"></script>
+		<script type="text/javascript" src="/javascripts/admin/web-rtc.js"></script>
+	</head>
+	<body>
+		<% include ./partial/header %>
+		<div class="main">
+			<div class="container">
+				<div class="row">
+					<div class="span9">
+						<div class="widget stacked">
+							<div class="widget-header">
+								<i class="icon-th-large"></i>
+								<h3>Welcome ;]</h3>
+							</div>
+							<div class="widget-content">
+								<button id="startButton" class="btn btn-primary">Start</button>
+								<button id="callButton" class="btn btn-primary">Call</button>
+								<button id="hangupButton" class="btn btn-primary">Hang Up</button>
+							  	<div>
+							  		<video id="localVideo" autoplay ></video>
+	    							<video id="remoteVideo" autoplay ></video>
+	    						</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a id="back-to-top" href="#top">
+			<i class="icon-chevron-up"></i>
+		</a>
+	</body>
+</html>

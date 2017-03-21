@@ -1,0 +1,47 @@
+		<div class="navbar navbar-inverse navbar-fixed-top">
+	      	<div class="navbar-inner">
+	        	<div class="container">
+	          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            		<span class="icon-bar"></span>
+	            		<span class="icon-bar"></span>
+	            		<span class="icon-bar"></span>
+	          		</a>
+	          		<a class="brand" href="#"><%= user.nama_user %></a>
+	          		<div class="nav-collapse collapse">
+	            		<ul class="nav">
+	              			<li class="" id="navHome"><a href="/dosen/home">Home</a></li>
+	              			<li class="" id="navDrop">
+	              				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	              					Reveal
+	              					<b class="caret"></b>
+	              				</a>
+	              				<ul class="dropdown-menu">
+	              					<li class=""><a href="/dosen/presentation">Presentation</a></li>
+	              					<li class=""><a href="/dosen/slide">Slide</a></li>
+	              				</ul>
+	              			</li>
+	              			<li class="" id="navFileUp"><a href="/dosen/file">File Upload</a></li>
+	              			<li class="" id="navRev"><a href="/dosen/livePresReveal">Live Presentation (Rev)</a></li>
+	              			<li class="" id="navFile"><a href="/dosen/livePresFile">Live Presentation (File)</a></li>
+	              			<% if(status == true) { %>
+		              			<li class="dropdown" id="navFitur">
+		              				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		              					<i class="icon-plus-sign icon-white"></i>&nbsp;Apps
+		              					<b class="caret"></b>
+		              				</a>
+			              			<ul class="dropdown-menu">
+			              			<% if(typePres == 'rev') { %>
+			              				<li id="chat"><a href="#"><i class="icon-comment"></i>&nbsp;Chat</a></li>
+			              				<li id="audioRev"><a href="#"><i class="icon-bullhorn"></i>&nbsp;Audio Broadcast</a></li>
+			              				<li id="audioRevDis" style="display:none"><a href="#"><i class="icon-bullhorn"></i>&nbsp;Disconnect Audio Broadcast</a></li>
+			              			<% } %>
+				              			<li id="student"><a href="#"><i class="icon-eye-open"></i>&nbsp;Student Online</a></li>
+				              			<li id="delPres"><a href="#"><i class="icon-off"></i>&nbsp;Ending</a></li>
+			              			</ul>
+		              			</li>
+	              			<% } %>
+	            		</ul>
+	          		</div><!--/.nav-collapse -->
+	        	</div>
+	      	</div>
+    	</div>

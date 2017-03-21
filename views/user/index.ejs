@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ./partial/head %>
+		<!--<script type='text/javascript' src='/javascripts/user/home.js'></script>-->
+	</head>
+	<body>
+		<% include ./partial/header %>
+		<div class="container">
+		<!-- <div class="rows"> -->
+		<!-- <div class="span9"> -->
+			<div class="hero-unit">
+		        <table class="table table-striped">
+		        	<!-- <caption>Presentasi via <strong>Reveal</strong> Tersedia</caption> -->
+		        	<caption>Presentation available :</caption>
+		        	<thead>
+		        		<tr>
+		        			<th>Room Name</th>
+		        			<th>Class</th>
+		        			<th>Lecturer</th>
+		        			<th>Course Code</th>
+		        			<th>Course</th>
+		        			<th>Chapter</th>
+		        			<th></th>
+		        		</tr>
+		        	</thead>
+		        	<tbody>
+		        		
+		        			<% if((cekPresent == 'reveal') || (cekPresent == 'file')) { for (var i = 0; i < data.length; i++) { %>
+		        				<tr>
+		        				<td><%= data[i].nama_room_alias %></td>
+		        				<td><%= data[i].nama_kelas %></td>
+		        				<td><%= data[i].nama_user %></td>
+		        				<td><%= data[i].kode_matkul %></td>
+		        				<td><%= data[i].nama_matkul %></td>
+		        				<td><%= data[i].chapter %></td>
+		        				<td><% if(i == 0) { %> <!-- Jika ada presentasi lebih dari 1 maka hanya yang pertama yang bisa -->
+		        					<button id="enroll" class="btn btn-success">Enroll</button>
+		        					<input type="hidden" id="enrollVal" value="<%=cekPresent%>">
+		        					<% } else { %>
+		        						<span class="label label-info">Hub. Dosen</span>
+		        					<% } %>
+		        				</td>
+		        				</tr>
+		        				<input type="hidden" id="rn" value="<%= data[i].nama_room %>">
+		        				<input type="hidden" id="al" value="<%= data[i].nama_room_alias %>">
+		        			<% }} %>
+		        		
+		        	</tbody>
+		        </table><hr>
+		        <p><button id="logout" class="btn btn-danger btn-large">
+		        	<i class="icon-remove-sign"></i> Logout</button>
+		        </p>
+		    </div>
+		<!-- </div> -->
+		<!-- </div> -->
+		</div>
+      	<% include ./partial/footer %>
+      	<script type='text/javascript' src="/socket.io/socket.io.js"></script>
+        <script type='text/javascript' src="/javascripts/user/index.js"></script>
+	</body>
+</html>

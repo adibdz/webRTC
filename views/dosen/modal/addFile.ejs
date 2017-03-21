@@ -1,0 +1,107 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#modalAddFile').modal({
+			show:true
+		});
+		$(function () {
+			var rules = {
+				rules: {
+			      	kdMakul: {
+				    	required: true
+			      	},
+			      	nMakul: {
+				    	required: true
+			      	},
+					chapter : {
+						required: true,
+						digits: true
+					},
+					profile_image: {
+				    	required: true
+			      	}
+				}
+			};
+			var validationObj = $.extend (rules, Application.validationRules);
+			$('#formAddFile').validate(validationObj);
+		});
+		$('#formAddFile').submit(function(){
+			if($('#formAddFile').valid()) {
+				$(this).ajaxSubmit({
+				// $.ajax({
+					type	: $(this).attr('method'),
+					url		: $(this).attr('action'),
+					data	: $(this).serialize(),
+					dataType: 'json',
+					beforeSend: function(){
+						$('#btn').attr('class','btn btn-primary disabled');
+					},
+					success	: function(response) {
+						//alert("response = "+response.status);
+						if(response.status == 1) {
+							$('#alert').attr('class','alert alert-success');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Add file success.');
+							$('#iconAlert').attr('class','icon-thumbs-up');
+							$('.tabelFlex').flexReload();
+							$('#alert').show();
+						} else if(response.status == 2) {
+							$('#alert').attr('class','alert alert-error');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Add file failed: '+response.eror);
+							$('#iconAlert').attr('class','icon-thumbs-down');
+							$('#alert').show();
+						} else if(response.status == 3) {
+							$('#alert').attr('class','alert alert-error');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Add file failed: '+response.message);
+							$('#iconAlert').attr('class','icon-thumbs-down');
+							$('#alert').show();
+						}
+						$('#btn').attr('class','btn btn-primary');
+					}
+				});
+				return false;
+			}
+		});
+	});
+</script>
+<div id="modalAddFile" class="modal hide fade">
+	<form enctype="multipart/form-data" action="/dosen/ajax/addDataFile" method="POST" class="form-horizontal" id="formAddFile">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Add File (ppt/pdf)</h3>
+	</div>
+	<div class="modal-body">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="kdMakul">Kode Makul</label>
+					<div class="controls">
+						<input type="text" name="kdMakul" id="kdMakul" placeholder="Kode Mata Kuliah">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="nMakul">Nama Makul</label>
+					<div class="controls">
+						<input type="text" name="nMakul" id="nMakul" placeholder="Nama Mata Kuliah">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="chapter">Chapter</label>
+					<div class="controls">
+						<input type="text" name="chapter" id="chapter" placeholder="Pertemuan ke-">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="profile_image">File (ppt/pdf)</label>
+					<div class="controls">
+						<input type="file" name="profile_image" id="profile_image">
+					</div>
+				</div>
+			</fieldset>
+	</div>
+	<div class="modal-footer">
+		<div id="alert" class="alert" style="display:none">
+			<div id="ketAlert"></div>
+		</div>
+		<button type="submit" class="btn btn-primary" id="btn">Upload</button>
+		<button type="reset" class="btn">Cancel</button>
+	</div>
+	</form>
+</div>

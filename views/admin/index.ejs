@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ./partial/head %>
+		<script type="text/javascript" src="/javascripts/admin/home.js"></script>
+	</head>
+	<body>
+		<% include ./partial/header %>
+		<div class="main">
+			<div class="container">
+				<div class="row">
+					<div class="span9">
+						<div class="widget stacked">
+							<div class="widget-header">
+								<i class="icon-th-large"></i>
+								<h3>Welcome ;]</h3>
+							</div>
+							<div class="widget-content">
+								<div class="hero-unit">
+									<h1>Final Project</h1>
+									Nama : <%= user.nama_user%><br>
+									NIP  : <%= user.kode_user%><br>
+									Level: <%= user.level%>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<a id="back-to-top" href="#top">
+			<i class="icon-chevron-up"></i>
+		</a>
+	</body>
+</html>

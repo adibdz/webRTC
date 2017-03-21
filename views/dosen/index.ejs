@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ./partial/head %>
+		<script type='text/javascript' src='/javascripts/dosen/home.js'></script>
+	</head>
+	<body>
+		<% include ./partial/header %>
+		<div class="container">
+			<div class="hero-unit">
+		        <h1>Final Project</h1>
+		        Nama : <%= user.nama_user%><br>
+				NIP  : <%= user.kode_user%><br>
+				Level: <%= user.level%>
+		        <p><a href="/dosen/logout" class="btn btn-primary btn-large">
+		        	<i class="icon-remove-sign"></i> Logout</a>
+		        </p>
+		    </div>
+		</div>
+      	<% include ./partial/footer %>
+	</body>
+</html>

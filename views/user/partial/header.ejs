@@ -1,0 +1,26 @@
+		<div class="navbar navbar-inverse navbar-fixed-top">
+	      	<div class="navbar-inner">
+	        	<div class="container">
+	          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            		<span class="icon-bar"></span>
+	            		<span class="icon-bar"></span>
+	            		<span class="icon-bar"></span>
+	          		</a>
+	          		<a class="brand" href="#"><%= user.nama_user %></a>
+	          		<div class="nav-collapse collapse">
+	            		<ul class="nav">
+	              			<li class="active" id="navHome"><a href="/home">Home</a></li>
+	              			<!-- <li class="" id="navLive"><a href="/livePresReveal">Live Presentation (Rev)</a></li> -->
+	              			<!-- <li class="" id="navFile"><a href="/livePresFile">Live Presentation (File)</a></li> -->
+	              			<% if(status == true) { %>
+	              				<!-- <li id="chat"><a href="#"><i class="icon-comment icon-white"></i>&nbsp;Chat</a></li> -->
+	              				<li id="cam"><a href="#"><i class="icon-facetime-video icon-white"></i>&nbsp;Audio / Camera</a></li>
+	              				<% if(type == 'file') { %>
+	              					<li><a href="/downloadPdf?t=<%=type%>&p=<%=data.alias%>"><i class="icon-download icon-white"></i>&nbsp;Download PDF</a></li>
+	              				<% } %>
+	              			<% } %>
+	            		</ul>
+	          		</div><!--/.nav-collapse -->
+	        	</div>
+	      	</div>
+    	</div>

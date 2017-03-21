@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ./partial/head %>
+		<link rel="stylesheet" href="/javascripts/lib/flex/flexigrid.pack.css">
+		<link rel="stylesheet" href="/javascripts/lib/flex/buttonFlex.css">
+		<style type="text/css">
+			.flexigrid div.pDiv div.pDiv2 {
+				margin: 3px 3px 10px -2px;
+			}
+			.flexigrid div.pDiv .pcontrol, .flexigrid div.pDiv .pPageStat {
+				top: -4px; 
+			}
+		</style>
+		<script type="text/javascript" src="/javascripts/lib/flexigrid.pack.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/Application.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/javascripts/lib/jquery.form.js"></script>
+		<script type='text/javascript' src='/javascripts/dosen/presentation.js'></script>
+	</head>
+	<body>
+		<% include ./partial/header %>
+		<div class="container">
+			<div class="row">
+				<div class="span12">
+					<div class="hero-unit">
+						<span class="badge badge-success">1</span> Add presentation<br>
+						<span class="badge badge-warning">2</span> Choose it<br>
+						<span class="badge badge-info">3</span> Create room
+						<table class="tabelFlex"></table>
+						<div id="modal"></div>
+					</div>
+				</div>
+		    </div>
+		</div>
+      	<% include ./partial/footer %>
+	</body>
+</html>

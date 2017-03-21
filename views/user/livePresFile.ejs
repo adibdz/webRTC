@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ./partial/head %>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/canvas/styleCanvas.css">
+        <link rel='stylesheet' type="text/css" href='/easyrtc/easyrtc.css'>
+		<style type="text/css">
+			.modal-body { height: 350px; }
+            #easyrtcErrorDialog {
+                top: 10%;
+            }
+		</style>
+	</head>
+	<body>
+        <input id="kdDosen" type="hidden" value="<%=data.kdDosen%>" name="">
+		<input id="kdUser" type="hidden" value="<%=user.kode_user%>" name="">
+        <input id="namaRoom" type="hidden" value="<%=roomId%>" name="">
+        <input id="kdKelas" type="hidden" value="<%=kdKelas%>" name="">
+        <% include ./partial/header %>
+        <div id="modalList"></div>
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+                    <input id="_pathFile" type="hidden" value="<%=data.path%>">
+					<canvas id="myCanvasClient" width="795" height="598"></canvas>
+					<div class="popup-beforeClick span4">
+                        Chat
+                        <span class="badge badge-warning pull-right" style="display:none"></span>
+                    </div>
+                    <div class="popup-box chat-pupup span5" style="display:none">
+                        <div class="popup-head">Chat</div>
+                        <div class="messages">
+                            <ul></ul>
+                            <div class="clear"></div>
+                        </div>
+                        <input class="span5" id="inputMessage" type="text" placeholder="Your message">
+                    </div>
+				</div>
+                <div class="span3">
+                    <video autoplay="autoplay" class="easyrtcMirror" id="studentVideo"></video>
+                    <hr>
+                    <video autoplay="autoplay" class="easyrtcMirror" id="lecturerVideo"></video>
+                    <div id="listActiveStudent">
+                        <table class="table table-striped">
+                            <tbody>
+                            <% for (var i = 0; i < student.length; i++) { %>
+                            <tr>
+                              <td class="<%=student[i].kode_user%>"><%=student[i].nama_user%></td>
+                              <td id="<%=student[i].kode_user%>" class="statusOnline"></td>
+                            </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+			</div>
+		</div>
+        <div id="noticeCall" class="modal" style="display:none">
+            <div class="modal-header">
+                <h5><span id="acceptCallLabel"></span></h5>
+                <button type="button" class="btn btn-primary" id="callAcceptButton">Accept</button>
+                <button type="button" class="btn" id="callRejectButton">Reject</button>
+            </div>
+        </div>
+		<div class="modal" id="notice" style="display:none">
+            <!-- error dari easyRTC pindah ke sini. -->
+            <div class="modal-header">
+                <button type="button" class="close" id="btnOk" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h6><span id="errorText"></span></h6>
+            </div>
+        </div>
+      	<% include ./partial/footer %>
+        <script type='text/javascript' src='/socket.io/socket.io.js'></script>
+        <script type='text/javascript' src='/easyrtc/easyrtc.js'></script>
+        <script type='text/javascript' src='/javascripts/user/userRTC.js'></script>
+      	<script type='text/javascript' src='/javascripts/lib/paperjs/canvas/zepto.js'></script>
+      	<script type='text/javascript' src='/javascripts/lib/paperjs/canvas/paper.js'></script>
+      	<script type='text/javascript' src='/javascripts/user/filePres.js'></script>
+      	<script type='text/paperscript' src='/javascripts/user/userCanvas.js' canvas="myCanvasClient"></script>
+	</body>
+</html>

@@ -1,0 +1,84 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#idKelas').val('<%= data[0].kode_kelas %>');
+		$('#kelas').val('<%= data[0].nama_kelas %>');
+		$('#modalAddKelas').modal({
+			show:true
+		});
+		$(function () {
+			var rules = {
+				rules: {
+					idKelas : {
+						required: true,
+						digits: true
+					},
+					kelas: {
+				    	required: true
+			      	}
+				}
+			};
+			var validationObj = $.extend (rules, Application.validationRules);
+			$('#formEditKelas').validate(validationObj);
+		});
+		$('#formEditKelas').submit(function(){
+			if($('#formEditKelas').valid()) {
+				$.ajax({
+					type	: $(this).attr('method'),
+					url		: $(this).attr('action'),
+					data	: $(this).serialize(),
+					dataType: 'json',
+					beforeSend: function(){
+						$('#btn').attr('class','btn btn-primary disabled');
+					},
+					success	: function(response) {
+						//alert("response = "+response.status);
+						if(response.status == 1) {
+							$('#alert').attr('class','alert alert-success');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Edit Sukses.');
+							$('#iconAlert').attr('class','icon-thumbs-up');
+							$('.tabelFlex').flexReload();
+							$('#alert').show();
+						} else if(response.status == 2) {
+							$('#alert').attr('class','alert alert-error');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Edit Gagal: '+response.eror);
+							$('#iconAlert').attr('class','icon-thumbs-down');
+							$('#alert').show();
+						}
+						$('#btn').attr('class','btn btn-primary');
+					}
+				})
+				return false;
+			}
+		});
+	});
+</script>
+<div id="modalAddKelas" class="modal hide fade">
+	<form action="/admin/ajax/editDataKelas" method="POST" class="form-horizontal" id="formEditKelas">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Edit Kelas</h3>
+	</div>
+	<div class="modal-body">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="idKelas">ID</label>
+					<div class="controls">
+						<input type="text" name="idKelas" id="idKelas" placeholder="Nomor Urut" readonly>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="kelas">Nama Kelas</label>
+					<div class="controls">
+						<input type="text" name="kelas" id="kelas">
+					</div>
+				</div>
+			</fieldset>
+	</div>
+	<div class="modal-footer">
+		<div id="alert" class="alert" style="display:none">
+			<div id="ketAlert"></div>
+		</div>
+		<button type="submit" class="btn btn-primary" id="btn">Simpan</button>
+	</div>
+	</form>
+</div>

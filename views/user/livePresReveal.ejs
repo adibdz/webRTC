@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title><%= roomName %></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="/components/reveal.js/css/reveal.css">
+        <link rel="stylesheet" href="/components/reveal.js/css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="/components/reveal.js/lib/css/zenburn.css">
+        <link rel='stylesheet' href='/bootstrap/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='/bootstrap/css/bootstrap-responsive.css'>
+        <style type="text/css">
+            .open, .dropup, .dropdown {
+                position: relative;
+            }
+            .modal-body {
+                height: 350px
+            }
+            #messages {
+                width: 250px
+            }
+            .nameDisconnect, .nameConnect {
+                font-size: 12px;
+                font-style: italic;
+                /*color: grey;*/
+                color: #989898;
+            }
+            #noticeChat {
+                /*left: 5%;*/
+                z-index: 1050;
+                /*margin-left: -280px;*/
+                top: 10%;
+                position: fixed;
+                float: left;
+                border: 2px solid #4BB2FC;
+            }
+            #notice {
+                border: #ffa800 solid 2px;
+                background-color: #f0fa7f;
+                color: #ff0000;
+            }
+            #noticeCall {
+                border: #157d94 solid 2px;
+                background-color: #3dd4f5;
+                color: #ffffff;
+            }
+        </style>
+        <script type='text/javascript' src='/javascripts/lib/jquery-1.7.2.min.js'></script>
+	</head>
+	<body>
+        <input id="kdDosen" type="hidden" value="<%=kdDosen%>" name="">
+        <input id="kdUser" type="hidden" value="<%=user.kode_user%>" name="">
+        <input id="namaRoom" type="hidden" value="<%=roomId%>" name="">
+        <input id="kdKelas" type="hidden" value="<%=kdKelas%>" name="">
+        <% include ./partial/header %>
+        <video autoplay="autoplay" id="lecturerAudio" style="display:none"></video>
+        <div id="modalChat" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4><i class="icon-comment"></i>&nbsp;Student Chat</h4>
+            </div>
+            <div class="modal-body">
+                <div id="messages"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="input pull-left">
+                    <input class="input-xlarge" id="inputMessage" type="text" placeholder="Your message">
+                </div>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="slides">
+                <% for (var i = 0; i < data.length; i++) { %>
+                	<section data-transition='<%= data[i].data_transition %>' data-background='<%= data[i].data_background %>'>
+                		<h2><%= data[i].judul_isi %></h2>
+                		<p>
+                			<%= data[i].isi_section %>
+                		</p>	
+                	</section>
+                <% }; %>
+            </div>
+        </div>
+        <div class="modal" id="noticeChat" style="display:none">
+            <div class="modal-header">
+                <button type="button" class="close" id="closeChat" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4><a href="#" id="showChat">You got <strong>message</strong> :)</a></h4>
+            </div>
+        </div>
+        <div id="noticeCall" class="modal" style="display:none">
+            <div class="modal-header">
+                <h5><span id="acceptCallLabel"></span></h5>
+                <button type="button" class="btn btn-primary" id="callAcceptButton">Accept</button>
+                <button type="button" class="btn" id="callRejectButton">Reject</button>
+            </div>
+        </div>
+        <div class="modal" id="notice" style="display:none">
+            <!-- error dari easyRTC pindah ke sini. -->
+            <div class="modal-header">
+                <button type="button" class="close" id="btnOk" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h6><span id="errorText"></span></h6>
+            </div>
+        </div>
+        <script type='text/javascript' src='/bootstrap/js/bootstrap.min.js'></script>
+      	<script type='text/javascript' src="/components/reveal.js/lib/js/head.min.js"></script>
+        <script type='text/javascript' src="/components/reveal.js/js/reveal.min.js"></script>
+        <script type='text/javascript' src="/socket.io/socket.io.js"></script>
+        <script type='text/javascript' src='/easyrtc/easyrtc.js'></script>
+        <script type='text/javascript' src="/javascripts/user/userRTC2.js"></script>
+        <script type='text/javascript' src="/javascripts/user/home.js"></script>
+        <script>
+        (function(){
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: false,
+                keyboard: false,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: '/components/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: '/components/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '/components/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: '/components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: '/components/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: '/components/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+        })();
+        </script>
+	</body>
+</html>

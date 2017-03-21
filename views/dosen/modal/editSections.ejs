@@ -1,0 +1,137 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#idPresent').val('<%= data[0].id_present_fk %>');
+		$('#section').val('<%= data[0].no_section %>');
+		$('#judul').val('<%= data[0].judul_isi %>');
+		$('#isi').val('<%= data[0].isi_section %>');
+		$('#dTrans').val('<%= data[0].data_transition %>');
+		$('#dback').val('<%= data[0].data_background %>');
+
+		$('#getColor').colorpicker();
+		$('#modalEditSections').modal({
+			show:true
+		});
+		$(function () {
+			var rules = {
+				rules: {
+					idPresent: {
+				    	required: true
+			      	},
+			      	section: {
+				    	required: true,
+				    	digits: true
+			      	},
+			      	judul: {
+				    	required: true
+			      	},
+			      	isi: {
+				    	required: true
+			      	},
+					dTrans : {
+						required: true
+					}
+				}
+			};
+			var validationObj = $.extend (rules, Application.validationRules);
+			$('#formEditSections').validate(validationObj);
+		});
+		$('#formEditSections').submit(function(){
+			if($('#formEditSections').valid()) {
+				$.ajax({
+					type	: $(this).attr('method'),
+					url		: $(this).attr('action'),
+					data	: $(this).serialize(),
+					dataType: 'json',
+					beforeSend: function(){
+						$('#btn').attr('class','btn btn-primary disabled');
+					},
+					success	: function(response) {
+						//alert("response = "+response.status);
+						if(response.status == 1) {
+							$('#alert').attr('class','alert alert-success');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Edit Sukses.');
+							$('#iconAlert').attr('class','icon-thumbs-up');
+							$('.tabelFlex').flexReload();
+							$('#alert').show();
+						} else if(response.status == 2) {
+							$('#alert').attr('class','alert alert-error');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Edit Gagal: '+response.eror);
+							$('#iconAlert').attr('class','icon-thumbs-down');
+							$('#alert').show();
+						}
+						$('#btn').attr('class','btn btn-primary');
+					}
+				})
+				return false;
+			}
+		});
+	});
+</script>
+<div id="modalEditSections" class="modal hide fade">
+	<form action="/dosen/ajax/editDataSections" method="POST" class="form-horizontal" id="formEditSections">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Edit Slide</h3>
+	</div>
+	<div class="modal-body">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="idPresent">ID Presentasi</label>
+					<div class="controls">
+						<input type="text" name="idPresent" id="idPresent" readonly="true">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="section">Slide Ke-</label>
+					<div class="controls">
+						<input type="text" name="section" id="section" readonly="true">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="judul">Judul Slide</label>
+					<div class="controls">
+						<input type="text" name="judul" id="judul">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="isi">Isi Slide</label>
+					<div class="controls">
+						<textarea rows="5" name="isi" id="isi"></textarea>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="dTrans">Data Transition</label>
+					<div class="controls">
+						<select name="dTrans" id="dTrans" > 
+							<option value="default">Default</option>
+							<option value="cube">Cube</option>
+							<option value="page">Page</option>
+							<option value="concave">Concave</option>
+							<option value="zoom">Zoom</option>
+							<option value="linear">Linear</option>
+							<option value="fade">Fade</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="dback">Data Background*</label>
+					<div class="controls">
+						<div class="input-append color" data-color="rgb(255, 146, 180)" data-color-format="hex" id="getColor">
+						  	<input type="text" name="dback" id="dback" class="span2" placeholder="Default" value="" readonly>
+						  	<span class="add-on">
+						  		<i style="background-color: rgb(255, 146, 180)"></i>
+						  	</span>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+	</div>
+	<div class="modal-footer">
+		<div id="alert" class="alert" style="display:none">
+			<div id="ketAlert"></div>
+		</div>
+		<button type="submit" class="btn btn-primary" id="btn">Simpan</button>
+		<button type="reset" class="btn">Cancel</button>
+	</div>
+	</form>
+</div>

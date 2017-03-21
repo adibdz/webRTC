@@ -1,0 +1,154 @@
+<script type='text/javascript' src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		// $('#btnRoom').hide();
+		var showKey = <%= showKey %>;
+		var linkRedirect = '';
+		// console.log('showKey: ' + showKey);
+		if(showKey) {
+			$('#showIdPresent').show();
+			linkRedirect = '/dosen/livePresReveal';
+			$('#presentType').val(true);
+		} else {
+			$('#showIdPresent').hide();
+			linkRedirect = '/dosen/livePresFile';
+			$('#presentType').val(false);
+		}
+		$('#nip').val('<%= kdUser %>');
+		$('#idPres').val('<%= idPres %>');
+		$('#modalAddRoom').modal({
+			show:true
+		});
+		$(function () {
+			var rules = {
+				rules: {
+					roomName: {
+				    	required: true
+			      	},
+			      	nip: {
+				    	required: true
+			      	},
+			      	kelas: {
+				    	required: true
+			      	},
+					idPres : {
+						required: true
+					},
+					angkatan : {
+						required: true
+					}
+				}
+			};
+			var validationObj = $.extend (rules, Application.validationRules);
+			$('#formAddRoom').validate(validationObj);
+		});
+		$('#formAddRoom').submit(function(){
+			if($('#formAddRoom').valid()) {
+				$.ajax({
+					type	: $(this).attr('method'),
+					url		: $(this).attr('action'),
+					data	: $(this).serialize(),
+					dataType: 'json',
+					beforeSend: function(){
+						$('#btn').attr('class','btn btn-primary disabled');
+					},
+					success	: function(response) {
+						//alert("response = "+response.status);
+						if(response.status == 1) {
+							$('#alert').attr('class','alert alert-success');
+							$('#ketAlert').html('Room ready&nbsp;<a href='+ linkRedirect +' class="btn btn-info" id="btnRoom"><i id="iconAlert" class="icon-chevron-right"></i>&nbsp;Access Room</a>');
+							/*$('#iconAlert').attr('class','');*/
+							$('.tabelFlex').flexReload();
+							$('#alert').show();
+							$('#btn').hide();
+							// $('#btnRoom').show();
+							emitUser();
+						} else if(response.status == 2) {
+							$('#alert').attr('class','alert alert-error');
+							$('#ketAlert').html('<i id="iconAlert" class=""></i>&nbsp Gagal: Hubungi Administrator');
+							$('#roomName').val('');
+							console.log('ERROR: ', response.eror);
+							$('#iconAlert').attr('class','icon-thumbs-down');
+							$('#alert').show();
+						}
+						$('#btn').attr('class','btn btn-primary');
+					}
+				})
+				return false;
+			}
+		});
+		function emitUser() {
+			var soc_publish = io.connect('/soc_publish');
+			soc_publish.on('connect', function () {
+				soc_publish.emit('join_room', {name: 'defaultRoom', level: 'dosen'});
+			});
+			soc_publish.on('disconnect', function () {
+		        soc_publish.disconnect();
+		        console.log('soc_publish disconnected');
+		    });
+		}
+	});
+</script>
+<div id="modalAddRoom" class="modal hide fade">
+	<form action="/dosen/ajax/addDataRoom" method="POST" class="form-horizontal" id="formAddRoom">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Add Room</h3>
+	</div>
+	<div class="modal-body">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="roomName">Room Name</label>
+					<div class="controls">
+						<input type="text" name="roomName" id="roomName">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="nip">NIP</label>
+					<div class="controls">
+						<input type="text" name="nip" id="nip" readonly="true">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="kelas">Class</label>
+					<div class="controls">
+						<select name="kelas" id="kelas">
+							<option value="">Choose . . .</option>
+							<% for(var i=0; i<data.length; i++) { %>
+				           		<option value= <%= data[i].kode_kelas %> > <%= data[i].nama_kelas %> </option>
+				           	<% } %>
+						</select>
+					</div>
+				</div>
+				<div class="control-group" id="showIdPresent">
+					<label class="control-label" for="idPres">Presentation ID</label>
+					<div class="controls">
+						<input type="text" name="idPres" id="idPres" readonly="true">
+					</div>
+				</div>
+				<!-- TAMBAHI TAHUN ANGKATAN -->
+				<div class="control-group">
+					<label class="control-label" for="angkatan">Year</label>
+					<div class="controls">
+						<select name="angkatan" id="angkatan">
+							<option value="">Choose . . .</option>
+							<option value="2010">2010</option>
+							<option value="2011">2011</option>
+							<option value="2012">2012</option>
+							<option value="2013">2013</option>
+							<option value="2014">2014</option>
+						</select>
+					</div>
+				</div>
+				<input type="hidden" name="cekPresentType" id="presentType">
+			</fieldset>
+	</div>
+	<div class="modal-footer">
+		<div id="alert" class="alert" style="display:none">
+			<div id="ketAlert"></div>
+		</div>
+		<button type="submit" class="btn btn-primary" id="btn">Create</button>
+		<!-- <button type="reset" class="btn">Cancel</button> -->
+	</div>
+	</form>
+</div>

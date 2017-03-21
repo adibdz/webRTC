@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<% include ./partial/head %>
+		<link rel="stylesheet" href="/bootstrap/colorpicker/css/colorpicker.css">
+		<link rel='stylesheet' type="text/css" href='/easyrtc/easyrtc.css'>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/canvas/styleCanvas.css">
+		<style type="text/css">
+			.modal-body {
+                height: 350px;
+            }
+            #easyrtcErrorDialog {
+                top: 10%;
+            }
+		</style>
+	</head>
+	<body>
+		<input id="kdUser" type="hidden" value="<%= user.kode_user%>">
+        <input id="namaRoom" type="hidden" value="<%= roomId%>">
+        <input id="namaKelas" type="hidden" value="<%= kelas%>">
+        <% include ./partial/header %>
+        <div id="modalList"></div>
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<input id="_pathFile" type="hidden" value="<%=data.path%>">
+					<canvas id="myCanvas" width="795" height="598"></canvas>
+					<div class="popup-beforeClick span4">
+						Chat
+						<span class="badge badge-warning pull-right" style="display:none"></span>
+					</div>
+					<div class="popup-box chat-pupup span5" style="display:none">
+						<div class="popup-head">Chat</div>
+						<div class="messages">
+							<ul></ul>
+			                <div class="clear"></div>
+						</div>
+						<input class="span5" id="inputMessage" type="text" placeholder="Your message">
+					</div>
+				</div>
+				<div class="span3">
+					<input type="button" class="btn btn-success" value="Call Students" id="callStudents">
+					<input type="button" class="btn btn-warning" value="Hang Up All" id="disconnect" style="display:none">
+					<video autoplay="autoplay" class="easyrtcMirror" id="lecturerVideo" src=""></video>
+					<hr>
+					<button type="button" class="btn" id="btnFirst">First</button>
+					<button type="button" class="btn" id="btnPrev">&lt;&lt;</button>
+					<span id="pageCounter">1</span> of <span id="maxPage"><%=data.totalPage%></span>
+					<button type="button" class="btn" id="btnNext">&gt;&gt;</button>
+					<button type="button" class="btn" id="btnLast">Last</button>
+					<hr>
+					<div class="input-prepend color" data-color="rgb(47,47,47)" data-color-format="hex" id="getColor">
+						<span class="add-on">
+							<i style="background-color: rgb(47,47,47)"></i>
+						</span>
+						<input type="text" class="input-mini" readonly="true">
+					</div>
+					<input type="range" class="input-medium" min="0" max="255" value="200" id="opacity">
+					<hr>
+					<div id="listActiveStudent">
+						<table class="table table-striped">
+							<tbody>
+								<% for (var i = 0; i < student.length; i++) { %>
+									<tr>
+										<td class="<%=student[i].kode_user%>"><%=student[i].nama_user%></td>
+										<td id="<%=student[i].kode_user%>" class="statusOnline"></td>
+									</tr>
+								<% } %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="row" id="boxVideo">
+				<% for (var i=0;i<student.length; i++) { %>
+					<div class="span2">
+						<video autoplay="autoplay" class="studentVid" id="<%=student[i].kode_user%><%=student[i].kode_user%>"></video>	<br>
+						<span><%=student[i].nama_user%></span> <br>
+					</div>
+				<% } %>
+			</div>
+		</div>
+		<div class="modal" id="notice" style="display:none">
+			<!-- error easyRTC pindahin ke sini. -->
+			<div class="modal-header">
+                <button type="button" class="close" id="btnOk" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h6><span id="errorText"></span></h6>
+            </div>
+        </div>
+        
+      	<% include ./partial/footer %>
+      	<script type='text/javascript' src='/socket.io/socket.io.js'></script>
+      	<script type='text/javascript' src='/easyrtc/easyrtc.js'></script>
+      	<script type='text/javascript' src='/javascripts/dosen/dosenRTC.js'></script>
+      	<script type='text/javascript' src='/bootstrap/colorpicker/js/bootstrap-colorpicker.js'></script>
+      	<script type='text/javascript' src='/javascripts/lib/paperjs/canvas/zepto.js'></script>
+      	<script type='text/javascript' src='/javascripts/lib/paperjs/canvas/paper.js'></script>
+      	<script type='text/javascript' src='/javascripts/dosen/dosenSrv3.js'></script>
+      	<script type='text/paperscript' src='/javascripts/dosen/dosenCanvas.js' canvas="myCanvas"></script>
+
+	</body>
+</html>
