@@ -2,8 +2,8 @@ module.exports = {
     'option': {
         'host': 'localhost',
 		'user': 'root',
-		'password': 'pens1@',
-		'database': 'socket',
+		'password': '',
+		'database': '',
 		'port': 3306
 	}
 };
